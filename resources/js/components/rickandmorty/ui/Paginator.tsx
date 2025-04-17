@@ -1,5 +1,5 @@
+import { PaginatorProps } from '@/types/rickandmorty/component-props';
 import { useMemo } from 'react';
-import { PaginatorProps } from "@/types/rickandmorty/component-props";
 
 const Paginator = ({ currentPage, totalPages, onPageChange }: PaginatorProps) => {
     const paginationNumbers = useMemo(() => {
@@ -20,11 +20,11 @@ const Paginator = ({ currentPage, totalPages, onPageChange }: PaginatorProps) =>
     }, [currentPage, totalPages]);
 
     return (
-        <div className="flex items-center justify-center space-x-2 mt-4">
+        <div className="mt-4 flex items-center justify-center space-x-2">
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-3 py-1 bg-gray-300 text-black disabled:opacity-50"
+                className="bg-gray-300 px-3 py-1 text-black disabled:opacity-50"
             >
                 Previous
             </button>
@@ -40,7 +40,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }: PaginatorProps) =>
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-3 py-1 bg-gray-300 text-black disabled:opacity-50"
+                className="bg-gray-300 px-3 py-1 text-black disabled:opacity-50"
             >
                 Next
             </button>

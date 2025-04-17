@@ -1,4 +1,4 @@
-import {CharacterType} from "@/types/rickandmorty/general";
+import { CharacterType } from '@/types/rickandmorty/general';
 
 export interface PaginatorProps {
     currentPage: number;

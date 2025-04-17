@@ -1,10 +1,10 @@
-import { useState, useCallback, useEffect , useMemo } from 'react';
+import CharacterDetail from '@/components/rickandmorty/CharacterDetails';
 import CharacterList from '@/components/rickandmorty/CharacterList';
+import LoadingSpinner from '@/components/rickandmorty/ui/LoadingSpinner';
 import Paginator from '@/components/rickandmorty/ui/Paginator';
 import SearchInput from '@/components/rickandmorty/ui/SearchInput';
 import useCharacterPagedListFetch from '@/hooks/useCharacterPagedListFetch';
-import CharacterDetail from "@/components/rickandmorty/CharacterDetails";
-import LoadingSpinner from "@/components/rickandmorty/ui/LoadingSpinner";
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const LandingPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -18,10 +18,7 @@ const LandingPage = () => {
         setCurrentPage(1);
     }, [searchQuery]);
 
-    const visible = useMemo(
-        () => characters.filter((c) => !removedIds.includes(c.id)),
-        [characters, removedIds]
-    );
+    const visible = useMemo(() => characters.filter((c) => !removedIds.includes(c.id)), [characters, removedIds]);
 
     const handlePageChange = useCallback((page: number) => {
         setCurrentPage(page);
@@ -51,33 +48,23 @@ const LandingPage = () => {
 
     return (
         <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Rick & Morty characters</h1>
+            <h1 className="mb-4 text-2xl font-bold">Rick & Morty characters</h1>
 
             {/* Show paginator and search if not in character details view */}
             {selectedId === null ? (
                 <>
-                    <div className="mb-4  max-w-xl m-auto">
+                    <div className="m-auto mb-4 max-w-xl">
                         <SearchInput onSearch={handleSearch} onReset={handleResetSearch} />
                     </div>
 
                     {loading && <LoadingSpinner />}
 
-                    {error && !loading && (
-                        <p className="text-red-600">{error}</p>
-                    )}
+                    {error && !loading && <p className="text-red-600">{error}</p>}
 
                     {!loading && !error && (
                         <>
-                            <CharacterList
-                                characters={visible}
-                                removeCharacter={handleRemove}
-                                onSelect={handleSelect}
-                            />
-                            <Paginator
-                                currentPage={currentPage}
-                                totalPages={totalPages}
-                                onPageChange={handlePageChange}
-                            />
+                            <CharacterList characters={visible} removeCharacter={handleRemove} onSelect={handleSelect} />
+                            <Paginator currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
                         </>
                     )}
                 </>
@@ -85,7 +72,7 @@ const LandingPage = () => {
                 <CharacterDetail id={selectedId} onClose={handleBack} />
             )}
         </div>
-    )
+    );
 };
 
 export default LandingPage;

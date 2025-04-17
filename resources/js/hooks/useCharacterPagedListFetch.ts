@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import axios from 'axios';
 import { CharacterType, RickAndMortyResponse, UseCharacterPageResult } from '@/types/rickandmorty';
+import axios from 'axios';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const useCharacterPagedListFetch = (page: number, searchQuery: string): UseCharacterPageResult => {
     const [characters, setCharacters] = useState<CharacterType[]>([]);
@@ -23,9 +23,8 @@ const useCharacterPagedListFetch = (page: number, searchQuery: string): UseChara
 
         try {
             const params = new URLSearchParams({ page: String(page) });
-            if (searchQuery.trim()) {
-                params.append('name', searchQuery.trim());
-            }
+            searchQuery.trim() && params.append('name', searchQuery.trim());
+
             const url = `https://rickandmortyapi.com/api/character/?${params.toString()}`;
             const response = await axios.get<RickAndMortyResponse>(url);
 
@@ -40,9 +39,7 @@ const useCharacterPagedListFetch = (page: number, searchQuery: string): UseChara
                 setTotalPages(0);
             }
         } finally {
-            if (isMounted.current) {
-                setLoading(false);
-            }
+            isMounted.current && setLoading(false);
         }
     }, [page, searchQuery]);
 

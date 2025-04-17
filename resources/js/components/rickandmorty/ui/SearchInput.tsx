@@ -1,19 +1,15 @@
-import { useState, KeyboardEvent, ChangeEvent, FocusEvent } from 'react';
-import { SearchInputProps } from "@/types/rickandmorty/component-props";
+import { SearchInputProps } from '@/types/rickandmorty/component-props';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 const SearchInput = ({ onSearch, onReset }: SearchInputProps) => {
     const [query, setQuery] = useState('');
 
     const handleSearch = () => {
-        query.trim() === '' ?
-            onReset():
-            onSearch(query);
+        query.trim() === '' ? onReset() : onSearch(query);
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
+        e.key === 'Enter' && handleSearch();
     };
 
     const handleBlur = () => {
@@ -32,7 +28,7 @@ const SearchInput = ({ onSearch, onReset }: SearchInputProps) => {
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
-            className="p-2 border rounded w-full"
+            className="w-full rounded border p-2"
         />
     );
 };

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { CharacterType } from '@/types/rickandmorty';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const useCharacterFetch = (id: number) => {
     const [character, setCharacter] = useState<CharacterType | null>(null);
-    const [error, setError] = useState<string|null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         setError(null);
@@ -16,6 +16,6 @@ const useCharacterFetch = (id: number) => {
     }, [id]);
 
     return { character, error };
-}
+};
 
-export default useCharacterFetch
+export default useCharacterFetch;

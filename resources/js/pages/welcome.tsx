@@ -1,6 +1,5 @@
-import { type SharedData } from '@/types';
-import { Head, Link, usePage } from '@inertiajs/react';
-import LandingPage from "@/pages/rickandmorty/LandingPage";
+import LandingPage from '@/pages/rickandmorty/LandingPage';
+import { Head } from '@inertiajs/react';
 
 export default function Welcome() {
     return (
