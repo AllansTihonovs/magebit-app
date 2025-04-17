@@ -24,7 +24,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }: PaginatorProps) =>
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="bg-gray-300 px-3 py-1 text-black disabled:opacity-50"
+                className="bg-gray-200 px-3 py-1 text-black disabled:opacity-50 cursor-pointer"
             >
                 Previous
             </button>
@@ -32,7 +32,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }: PaginatorProps) =>
                 <button
                     key={page}
                     onClick={() => onPageChange(page)}
-                    className={`px-3 py-1 ${page === currentPage ? 'bg-gray-500 text-white' : 'bg-gray-300 text-black'}`}
+                    className={`px-3 py-1 cursor-pointer ${page === currentPage ? 'bg-gray-500 text-white' : 'bg-gray-200 text-black'}`}
                 >
                     {page}
                 </button>
@@ -40,7 +40,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }: PaginatorProps) =>
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="bg-gray-300 px-3 py-1 text-black disabled:opacity-50"
+                className="bg-gray-200 px-3 py-1 text-black disabled:opacity-50 cursor-pointer"
             >
                 Next
             </button>
